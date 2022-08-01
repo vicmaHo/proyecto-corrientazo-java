@@ -1,0 +1,81 @@
+@startuml "Diagrama de clases"
+
+enum EstadoPedido {
+    PENDIENTE_ENTREGAR
+    PENDIENTE_COBRAR
+}
+
+Class Mesa {
+    - String numero 
+
+    + Integer calcularValorPagar()
+    + Integer pagar(Integer efectivo)
+} 
+
+Class Pedido {
+    - String cliente
+    + void entregar()
+}
+
+Class Adicional {
+    - String nombre
+    - Integer precio
+}
+
+Class OpcionSopa {
+    - String nombre 
+}
+
+
+Class OpcionPrincipio {
+    - String nombre 
+}
+
+
+Class OpcionCarne {
+    - String nombre 
+}
+
+
+Class OpcionEnsalada {
+    - String nombre 
+}
+
+
+Class OpcionJugo {
+    - String nombre 
+}
+
+Abstract Class OpcionPedido {
+    - Integer precio
+}
+
+Class Completo {
+
+}
+
+Class Bandeja {
+
+}
+
+Mesa "1" -- "*" Pedido
+
+Pedido .right.> EstadoPedido
+Pedido "*" -left- "*" Adicional
+
+
+
+
+Pedido "1" -- "1" OpcionPedido
+
+OpcionPedido <|-left- Completo
+OpcionPedido <|-right- Bandeja
+
+Completo "*" -- "1" OpcionSopa
+
+
+OpcionPedido "*" -- "1" OpcionCarne
+OpcionPedido "*" -- "1" OpcionEnsalada
+OpcionPedido "*" -- "1" OpcionJugo
+OpcionPedido "*" -- "1" OpcionPrincipio
+@enduml
